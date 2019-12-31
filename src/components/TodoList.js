@@ -10,7 +10,7 @@ class TodoList extends Component {
     }
 
     componentDidMount() {
-        fetch('')
+        fetch('https://localhost:5001/v1/Todo')
         .then(res => res.json())
         .then((data) => {
             this.setState({listItems:data})
@@ -26,10 +26,12 @@ class TodoList extends Component {
 
         return (
             <div>
-                {listItems.map((item, index) =>
+                {this.state.listItems.map((item, index) =>
                 <div key={item.itemName + index}>
-                    <h1>{item.itemName}</h1>
+                    <TodoItem itemName={item.itemName} description={item.description}></TodoItem>
+                    {/* <h1>{item.itemName}</h1>
                     <p>{item.description}</p>
+                    <FontAwesomeIcon icon={faWindowClose} size="2x" color="red"></FontAwesomeIcon> */}
                     <hr/>
                 </div>
                 )}

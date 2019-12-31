@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TodoItem from './components/TodoItem';
 import TodoList from './components/TodoList';
-import {Modal} from 'react-bootstrap';
+import AddItem from './components/AddItem';
 
 class App extends Component {
   render() {
@@ -18,13 +17,17 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
 
+
         <div className="Todo-modal">
-        <TodoItem />
+          <AddItem></AddItem>
         </div>
 
-        <TodoList></TodoList>
-        
-        
+        <br/>
+
+        <div className="Todo-modal">
+          <TodoList />
+        </div>
+      
       </div>
     );
   }
