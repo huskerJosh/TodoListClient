@@ -45,8 +45,6 @@ class AddItem extends Component {
                 "isActive": true
                })
 
-        }).then(resp => {
-            this.fetchData();
         })
     }
 

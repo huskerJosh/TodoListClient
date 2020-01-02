@@ -19,19 +19,12 @@ class TodoList extends Component {
     }
 
     render() {
-        
-        // var listItems = [{'itemName':'wash car', 'description':' wash the jeep'},
-        // {'itemName':'feed dog', 'description':' feed Piper'},
-        // {'itemName':'do laundry', 'description':' do Mila\'s laundry'}];
 
         return (
             <div>
                 {this.state.listItems.map((item, index) =>
                 <div key={item.itemName + index}>
-                    <TodoItem itemName={item.itemName} description={item.description}></TodoItem>
-                    {/* <h1>{item.itemName}</h1>
-                    <p>{item.description}</p>
-                    <FontAwesomeIcon icon={faWindowClose} size="2x" color="red"></FontAwesomeIcon> */}
+                    <TodoItem itemName={item.itemName} description={item.description} id={item.id}></TodoItem>
                     <hr/>
                 </div>
                 )}
