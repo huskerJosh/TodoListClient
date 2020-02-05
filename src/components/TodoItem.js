@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import {Button, Form, Row, Col} from 'react-bootstrap';
+import { connect} from 'react-redux';
 
 class TodoItem extends Component {
-    removeItem(id){
-        console.log(id);
-        fetch("https://localhost:5001/v1/Todo/" + id, {
+    removeItem(){
+        fetch("https://localhost:5001/v1/Todo/" + this.props.id, {
             method: 'delete',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
-                "id": id
+                "id": this.props.id
                })
-        })
+        });
+
+        this.props.deleteItem(this.props.id);
     }
+
+    // handleClick = () => {
+    //     this.props.deleteItem(this.props.id);
+    // }
 
     render() {
         return (
@@ -29,4 +35,14 @@ class TodoItem extends Component {
     }
 }
 
-export default TodoItem;
+const mapStateToProps = (state, ownProps) => {
+    return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteItem: (id) => {dispatch({type: 'DELETE_ITEM', id: id})}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoItem);

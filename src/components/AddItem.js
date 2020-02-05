@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Form, Col} from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 class AddItem extends Component {
     constructor(props) {
@@ -13,6 +14,9 @@ class AddItem extends Component {
                 },
                 description: {
                   value: ''
+                },
+                id: {
+                    value: ''
                 }
             }
         }
@@ -34,18 +38,26 @@ class AddItem extends Component {
         });
     }
 
-    addItem(event){
+   async addItem(event){
         event.preventDefault();
-        fetch("https://localhost:5001/v1/AddItem", {
-            method: 'post',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({
-                "itemName": this.state.formControls.itemName.value,
-                "description":this.state.formControls.description.value,
-                "isActive": true
-               })
+    
+        var result = await fetch("https://localhost:5001/v1/AddItem", {
+        method: 'post',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            "itemName": this.state.formControls.itemName.value,
+            "description":this.state.formControls.description.value,
+            "isActive": true
+           })
+        }).then(response => response.json())
+          .then(json => {return json});
+        
+        this.props.addItem(result);
 
-        })
+        this.setState([this.state.formControls.description.value='']);
+        this.setState([this.state.formControls.itemName.value='']);
+
+        
     }
 
     render(){
@@ -78,4 +90,16 @@ class AddItem extends Component {
     }
 }
 
-export default AddItem;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItem: (todoItem) => { dispatch({type: 'ADD_ITEM', item: todoItem})}
+    }
+ }
+
+ const mapStateToProps = (state) => {
+    return {
+        listItems: state.listItems
+    }
+ }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddItem);
