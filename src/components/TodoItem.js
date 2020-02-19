@@ -15,10 +15,6 @@ class TodoItem extends Component {
         this.props.deleteItem(this.props.id);
     }
 
-    // handleClick = () => {
-    //     this.props.deleteItem(this.props.id);
-    // }
-
     render() {
         return (
             <div className="App">

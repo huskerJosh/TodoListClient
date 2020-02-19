@@ -66,7 +66,7 @@ class AddItem extends Component {
             <Form>
                 <Form.Row>
                     <Form.Group as={Col}>
-                        <Form.Control placeholder="Enter Item Name" 
+                        <Form.Control placeholder="Todo Item" 
                         name="itemName" 
                         type="text"
                         value={this.state.formControls.itemName.value} 
